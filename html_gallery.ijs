@@ -6,12 +6,12 @@ NB. Cliff Reiter and Zach Reiter, November 2002
 NB. modified for J8.04, January 2016
 NB.
 
-NB. locale for image_kit addon
+NB. locale for imagekit addon
 require '~addons/media/imagekit/imagekit.ijs'
 coinsert 'mkit'
 coclass 'mkit'
 
-NB. path to the image_kit addon library needs to be correct.
+NB. path to the imagekit addon library needs to be correct.
 dir_sep=: '/'            NB. directory separator
 
 dir_pred=:'../'                  NB. directory predecessor

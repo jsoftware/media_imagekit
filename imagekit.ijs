@@ -239,8 +239,8 @@ pal;ind
 )
 
 try=: 0 : 0
-fn=:jpath '~addons/media/image_kit/atkiln.jpg'
-fn2=:jpath '~addons/media/image_kit/hy_fly_di.png'
+fn=:jpath '~addons/media/imagekit/atkiln.jpg'
+fn2=:jpath '~addons/media/imagekit/hy_fly_di.png'
 $b=:read_image fn
 view_image fn
 view_image b

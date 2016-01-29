@@ -9,7 +9,7 @@ LABWINDOWED=: 0
 
 NB. =========================================================
 Lab Section Image_kit addon
-The image_kit addon is designed to allow reading and writing 24 bit image files to and from J. This allows format conversion under program control as well as convenient file i/o for image processing with J. The supported types are BMP, JPEG, and PNG. There is limited support for 8-bit images. Since these facilities by their nature overwrite files, we offer standard but essential advice in such circumstances: users should work on duplicate copies of their files.
+The imagekit addon is designed to allow reading and writing 24 bit image files to and from J. This allows format conversion under program control as well as convenient file i/o for image processing with J. The supported types are BMP, JPEG, and PNG. There is limited support for 8-bit images. Since these facilities by their nature overwrite files, we offer standard but essential advice in such circumstances: users should work on duplicate copies of their files.
 )
 
 NB. =========================================================

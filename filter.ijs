@@ -4,10 +4,10 @@ NB. November 2015 for J8.03
 NB.
 NB. Some utilities for filtering 2-dimensional
 NB. arrays in the spatial domain
-NB. It is assumed that image_kit addon is available
+NB. It is assumed that imagekit addon is available
 NB. Some suggested experiments appear at the end
 
-NB. locale for image_kit addon
+NB. locale for imagekit addon
 coinsert 'mkit'
 coinsert 'jgl2'
 coclass  'mkit'
@@ -159,7 +159,7 @@ NB. Run individual lines of interest
 experiments=:0 : 0
 NB. The test image snowflake.png is available from
 NB. https://webbox.lafayette.edu/~reiterc/j/withj/snowflake.png
-NB. Save it in the image_kit addon directory
+NB. Save it in the imagekit addon directory
 NB. Adjust path to read the image if necessary
 NB. b should have shape 700 by 780
 $b=: ,. read_image addon_path,'snowflake.png'
