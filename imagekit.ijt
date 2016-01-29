@@ -1,0 +1,159 @@
+LABTITLE=: 'Imagekit Addon'
+LABAUTHOR=: 0 : 0
+Cliff Reiter
+Math Dept, Lafayette College
+reiterc@lafayette.edu
+modified for J8.04, January 2016
+)
+LABWINDOWED=: 0
+
+NB. =========================================================
+Lab Section Image_kit addon
+The image_kit addon is designed to allow reading and writing 24 bit image files to and from J. This allows format conversion under program control as well as convenient file i/o for image processing with J. The supported types are BMP, JPEG, and PNG. There is limited support for 8-bit images. Since these facilities by their nature overwrite files, we offer standard but essential advice in such circumstances: users should work on duplicate copies of their files.
+)
+
+NB. =========================================================
+Lab Section Note re. html lab
+The image i/o utilities form the basis for html image gallery building and the other facilities included with the addon. While we briefly consider html gallery building, a more detailed lab, dealing just with html galleries, may be studied. 
+)
+
+NB. =========================================================
+Lab Section Loading the addon image script
+The addon script uses system calls to access the image files.
+)
+dir_sep=: '/'
+addon_path=: jpath '~addons/media/imagekit/'
+require addon_path,'imagekit.ijs'
+
+NB. =========================================================
+Lab Section Creating a temp folder
+Now we will define a temporary directory to place the image files that we will create during this lab. You may delete this directory when you are finished with the lab. However, the image3 html lab assumes that the images created by this lab are in place. Hence, you may want to leave the temporary directory in place until you have done the html lab.
+)
+create_dir=:1!:5 :: ]
+]im_path=: jpath '~temp/imagekit/'   NB. directory to be created
+create_dir < im_path
+
+NB. =========================================================
+Lab Section Notice provided images
+Now we can observe that one jpeg image, atkiln.jpg, was included with the addon and one png image was also included. We assign "im1" and "im2" as names for those files.
+)
+fdir addon_path,'*.jpg'
+im1=:addon_path,'atkiln.jpg'
+fdir addon_path,'*.png'
+im2=:addon_path,'hy_fly_di.png'
+
+NB. =========================================================
+Lab Section Reading an image
+We can read the image "im1" into J. It is a three dimensional integer array giving RGB triples with each entry an integer in the range 0-255. Its shape is height by width by 3.
+)
+B=:read_image im1
+$B
+<"1 (2 4){.B
+
+NB. =========================================================
+Lab Section Writing an image
+We can save the array B as a BMP in the temp directory. We also load the "view_m" script so that we can view the image. You close the image windows at your convenience, but you may want to leave them open for a couple of lab steps so that you can easily compare variations on the images which will be shown.
+)
+B write_image im_path,'atkiln.bmp'
+view_image im_path,'atkiln.bmp'
+
+NB. =========================================================
+Lab Section Negating an image
+It is easy to do arithmetic to negate the image, and then save and view it.
+)
+(255-B) write_image im_path,'negative.bmp'
+view_image im_path,'negative.bmp'
+
+NB. =========================================================
+Lab Section Raw images
+While integer arrays are convenient for most image processing, raw, binary, character arrays of bytes suffice for mechanical manipulations and save memory. Notice that "write_image" can also use binary arrays for its data.
+)
+$B=:raw_read_image im_path,'atkiln.bmp'
+1 4{.B   NB. B contains raw, undisplayable, data
+(|.B) write_image im_path,'flip.bmp'
+view_image im_path,'flip.bmp'
+
+NB. =========================================================
+Lab Section Jpeg images
+We can save the images as *.bmp, *.jpg (or *.jpeg), *.png, etc. by using the appropriate filename extention. Since bmp, png, tga, and pnm are "lossless", there is not too much risk in using them. However, jpeg images are compressed using techniques that lose information and because of the space savings, it desirable to use the quality options in a manner appropriate to the application. Both global variables and options may be used to control the quality setting. Notice that the jpeg file is dramatically smaller than the png.
+)
+B write_image im_path,'temp.png'
+JPEG_QUALITY_mkit_
+B write_image im_path,'temp90.jpg'
+
+NB. =========================================================
+Lab Section Jpeg quality
+Compare the temp75.jpg and temp90.jpg images. Here we changed the global setting to change the quality. Notice the higher quality image took more space but at screen quality it is difficult to see significant difference.
+)
+JPEG_QUALITY_mkit_=:75   NB. reset to default value
+view_image im_path,'temp75.jpg'
+view_image im_path,'temp90.jpg'
+
+NB. =========================================================
+Lab Section Jpeg quality II
+Other exmples:
+)
+60 B write_image im_path,'temp60.jpg'
+40 B write_image im_path,'temp40.jpg'
+10 B write_image im_path,'temp10.jpg'
+ 5 B write_image im_path,'temp05.jpg'
+view_image im_path,'temp05.jpg'
+
+NB. =========================================================
+Lab Section Palettes
+A common 8-bit image format consists of a palette and an array of indices into the palette representing the pixels. Such a format is useful for abstract images with few colors but may also be used to approximate a full color image. In that case, quality is lost in exchange for smaller size. The function quantize_image allows us to create a palette of the specified size and the array suitable for saving.
+)
+B write_image im_path,'temp.bmp'
+(C256=:256 quantize_image B) write_image im_path,'atk256.bmp'
+(C16=:16 quantize_image B) write_image im_path,'atk016.png'
+view_image C256
+view_image C16
+
+NB. =========================================================
+Lab Section Palettes II: Hue
+A function Hue is defined by the script. It gives full intensity colors running from red to yellow to green to cyan to blue to magenta and back to red as its argument runs from 0 to 1. 
+)
+
+Hue(i.%<:)11
+
+NB. =========================================================
+Lab Section Palettes IV
+We may save paletted images using <tt>(pal;indices)</tt> type structures. Paletted bmp and
+png images may also be read as palleted images.
+)
+
+$hpal=:Hue(i.%<:)256
+$b=:256#i.1 256
+(hpal;b) write_image im_path,'hues.png'
+view_image im_path,'hues.png'
+
+NB. =========================================================
+Lab Section Loading html_gallery
+The addon script html_gallery8 provides functions for working with collections of images and creating html files for showing them. These are convenient for applications such as reviewing, manipulating, and presenting for web viewing, a collection of images from a digital camera.
+)
+load '~addons/media/imagekit/html_gallery.ijs'
+
+NB. =========================================================
+Lab Section Image lists
+We can now easily check which images are in the temporary folder we created.
+)
+>images_in im_path
+
+images_in im_path
+
+NB. =========================================================
+Lab Section Jpegs in temp folder
+Now we consider just the set of jpeg images. Any thumbnails with default thumbnail type name will not be included.
+)
+>im_list=:jpegs_in im_path
+$im_list
+
+NB. =========================================================
+Lab Section A gallery page
+Here we made a 4 column gallery page which has the default name index.html in the temporary folder.
+Thumbnails will be created for each image so this will take several seconds. If the command below doesn't open a browser once the computation is done, use a web browser to open index.html in the temporary folder. Click on images to get a full view and observe the impact of quality settings upon the images.
+)
+4 mk_html_gallery 240 180 im_list
+
+NB. attempt to launch browser:
+open_html im_path,'index.html'
