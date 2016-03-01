@@ -7,6 +7,9 @@ require 'viewmat'
 coinsert 'mkit'
 coclass 'mkit'
 
+NB. for j803
+IFJA=: (IFJA"_)^:(0=4!:0<'IFJA')0
+
 NB. default jpeg quality
 JPEG_QUALITY=:90
 
@@ -100,9 +103,10 @@ y&,&.>/:~{."1 fdir y,m
 
 NB. conditional flip of bytes
 set_cflip=: 3 : 0
+if. IFJA do. RGBSEQ=. RGBSEQ_ja_ else. RGBSEQ=. RGBSEQ_jqtide_ end.
 try.
-if. RGBSEQ_jqtide_ do. cflip=:|."1 else. cflip=:] end.
-catch. smoutput 'Requires JQT' end.
+if. RGBSEQ do. cflip=:|."1 else. cflip=:] end.
+catch. smoutput IFJA{::'Requires JQT';'Requires JAndroid' end.
 ' '
 )
 set_cflip''
@@ -117,7 +121,7 @@ NB. h by w by 3 from a. to packed h by w integer
 rgb_raw_to_i=:{.@(_2&ic)"1 @: (,&(255{a.)@cflip) 
 
 NB. read image each pixel as one integer
-read_image_raw=:readimg_jqtide_ 
+read_image_raw=:readimg_jqtide_`readimg_ja_@.IFJA
 
 NB. h by w by 3 integer image array
 read_image =: i_to_rgb@:read_image_raw
@@ -144,10 +148,10 @@ view_image=: viewrgb@:image_to_i
 
 NB. write an image to file
 write_image=: 1 : 0
-(image_to_i m) writeimg_jqtide_ y
+(image_to_i m) writeimg_jqtide_`writeimg_ja_@.IFJA y
 fsize y
 :
-(image_to_i m) writeimg_jqtide_ y;'jpeg';'quality';x
+(image_to_i m) writeimg_jqtide_`writeimg_ja_@.IFJA y;'jpeg';'quality';x
 fsize y
 )
 
