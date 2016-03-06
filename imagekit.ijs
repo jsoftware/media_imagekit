@@ -103,7 +103,7 @@ y&,&.>/:~{."1 fdir y,m
 
 NB. conditional flip of bytes
 set_cflip=: 3 : 0
-if. IFJA do. RGBSEQ=. RGBSEQ_ja_ else. RGBSEQ=. RGBSEQ_jqtide_ end.
+if. IFJA do. RGBSEQ=. RGBSEQ_j_ else. RGBSEQ=. RGBSEQ_jqtide_ end.
 try.
 if. RGBSEQ do. cflip=:|."1 else. cflip=:] end.
 catch. smoutput IFJA{::'Requires JQT';'Requires JAndroid' end.

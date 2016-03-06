@@ -1,4 +1,4 @@
-LABTITLE=: 'Imagekit Addon'
+LABTITLE=: 'Imagekit Addon (jandroid)'
 LABAUTHOR=: 0 : 0
 Cliff Reiter
 Math Dept, Lafayette College
@@ -52,26 +52,26 @@ $B
 
 NB. =========================================================
 Lab Section Writing an image
-We can save the array B as a BMP in the temp directory. We also load the "view_m" script so that we can view the image. You close the image windows at your convenience, but you may want to leave them open for a couple of lab steps so that you can easily compare variations on the images which will be shown.
+We can save the array B as a PNG in the temp directory. We also load the "view_m" script so that we can view the image. You close the image windows at your convenience, but you may want to leave them open for a couple of lab steps so that you can easily compare variations on the images which will be shown.
 )
-B write_image im_path,'atkiln.bmp'
-view_image im_path,'atkiln.bmp'
+B write_image im_path,'atkiln.png'
+view_image im_path,'atkiln.png'
 
 NB. =========================================================
 Lab Section Negating an image
 It is easy to do arithmetic to negate the image, and then save and view it.
 )
-(255-B) write_image im_path,'negative.bmp'
-view_image im_path,'negative.bmp'
+(255-B) write_image im_path,'negative.png'
+view_image im_path,'negative.png'
 
 NB. =========================================================
 Lab Section Raw images
 While integer arrays are convenient for most image processing, raw, binary, character arrays of bytes suffice for mechanical manipulations and save memory. Notice that "write_image" can also use binary arrays for its data.
 )
-$B=:raw_read_image im_path,'atkiln.bmp'
+$B=:raw_read_image im_path,'atkiln.png'
 1 4{.B   NB. B contains raw, undisplayable, data
-(|.B) write_image im_path,'flip.bmp'
-view_image im_path,'flip.bmp'
+(|.B) write_image im_path,'flip.png'
+view_image im_path,'flip.png'
 
 NB. =========================================================
 Lab Section Jpeg images
@@ -104,8 +104,8 @@ NB. =========================================================
 Lab Section Palettes
 A common 8-bit image format consists of a palette and an array of indices into the palette representing the pixels. Such a format is useful for abstract images with few colors but may also be used to approximate a full color image. In that case, quality is lost in exchange for smaller size. The function quantize_image allows us to create a palette of the specified size and the array suitable for saving.
 )
-B write_image im_path,'temp.bmp'
-(C256=:256 quantize_image B) write_image im_path,'atk256.bmp'
+B write_image im_path,'temp.png'
+(C256=:256 quantize_image B) write_image im_path,'atk256.png'
 (C16=:16 quantize_image B) write_image im_path,'atk016.png'
 view_image C256
 view_image C16
