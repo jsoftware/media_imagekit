@@ -8,7 +8,7 @@ The image kit package provides utilities for accessing 24-bit jpeg, png image fi
 The addon includes several scripts. The main script, imagekit.ijs, provides J functions for the basic image reading, writing, and viewing images through other J addons. Another script, html_gallery.ijs, provides J functions that create thumbnails and image galleries under J program control. Sample scripts and a rotation form script are also included.
 )
 
-VERSION=: '1.0.4'
+VERSION=: '1.0.5'
 
 RELEASE=: 'j803 j804'
 
@@ -22,7 +22,7 @@ graphics/viewmat
 
 FILES=: 0 : 0
 atkiln.jpg
-color_space
+color_space.ijs
 filter.ijs
 html_gallery.ijs
 hy_fly_di.png
