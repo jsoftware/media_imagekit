@@ -1,7 +1,7 @@
 NB. Image kit
 NB. Utilities for working with images
 NB. a partial replacement for image3.ijs and view_m.ijs from the image3 addon
-NB. Cliff Reiter 2015
+NB. Cliff Reiter 2015 with additions by Bill Lam
 
 require 'viewmat'
 coinsert 'mkit'
@@ -148,8 +148,12 @@ view_image=: viewrgb@:image_to_i
 
 NB. write an image to file
 write_image=: 1 : 0
+if. (<to_lc fn_ext y)e. 'jpg';'jpeg' do. 
+  JPEG_QUALITY m write_image y
+else.
 (image_to_i m) writeimg_jqtide_`writeimg_ja_@.IFJA y
 fsize y
+end.
 :
 (image_to_i m) writeimg_jqtide_`writeimg_ja_@.IFJA y;'jpeg';'quality';x
 fsize y
@@ -241,6 +245,8 @@ ind=.((;b)i."_ 1 y){i
 pal=.<.@mean&>b
 pal;ind
 )
+
+coclass 'base'
 
 try=: 0 : 0
 fn=:jpath '~addons/media/imagekit/atkiln.jpg'

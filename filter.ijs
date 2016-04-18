@@ -152,7 +152,55 @@ sf_filt=:3 : 0
 )
 
 NB. *******************
-NB. Part V: Experiments
+NB. Part V: Savitzky-Golay & Derivatives
+NB. *******************
+
+NB. create super pixels
+spix=:[ # #"_1
+
+NB. Savitzky-Golay weights
+NB. (do,dp) sgw (lr,rr)
+NB. do: derivative order
+NB. pd: polynomial degree
+NB. lr: left radius
+NB. rr: right radius
+sgw=: 4 : '({.x)(!@[*{)%. (({.y)-~i.1+({.+{:)y) ^/ i. 1+{:x'
+
+NB. Savitzky-Golay value
+NB. {.m is poly deg
+NB. {:m is rr which matches lr
+SGV=:1 : '[: clamp [: round ((0,{.m) sgw ({:m)) MFilt1d2'
+
+NB. 2-sided constant extension
+conext=:1&$: : ((#,:@:{.),],(#,:@:{:))
+
+NB. Savitzky-Golay 1d filter
+NB. m is (do,pd)
+NB. n is lr which matches rr
+SG=:2 : '(1+2*n)&((m sgw n)&(+/ . *)\)@:(n&conext)'
+
+NB. Sobel edge detector using Savitzky-Golay
+sob=:1 : 0
+d=.(1,{.m) SG ({:m)
+(d y)+&.*: d"_1 y
+)
+
+NB. Sobel using 3 by 3 divided differences
+sobdx=: 1 2 1 */ 1 0 _1
+sobdy=: |:sobdx
+lsob2=: *&sobdx +&.:*:&(+/@,) *&sobdy
+sob2=: 3 3&(lsob2;._3)
+
+NB. Laplcian (dp,r) lap 
+lap=:1 : 0
+d=.(2,{.m) SG ({:m)
+(d y)+d"_1 y
+)
+
+coclass 'base'
+
+NB. *******************
+NB. Part VI: Experiments
 NB. *******************
 NB. Run individual lines of interest
 
