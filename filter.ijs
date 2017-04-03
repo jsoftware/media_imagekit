@@ -42,7 +42,7 @@ NB. *******************************
 NB. s gauss n gives a vector that is approximately 
 NB. normally distributed with standard deviation s
 NB. and with n sample points.
-gauss=:1 : '[:(%+/)^@-@*:@-:@(%&m)@:(i.--:@<:)'
+gauss=:1 : '[:(%+/)^@-@-:@*:@(%&m)@:(i.--:@<:)'
 
 NB. s gauss2d n gives a matrix that is approximately 
 NB. binormally distributed with standard deviation s
