@@ -10,7 +10,9 @@ The addon includes several scripts. The main script, imagekit.ijs, provides J fu
 
 VERSION=: '1.0.7'
 
-RELEASE=: 'j803 j804 j805'
+RELEASE=: 'j804'
+
+FOLDER=: 'media/imagekit'
 
 LABCATEGORY=: 'Media'
 
@@ -35,4 +37,3 @@ pal_rw_bmp.ijs
 poster.jpg
 transform_m.ijs
 )
-
