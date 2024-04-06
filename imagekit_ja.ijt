@@ -68,7 +68,7 @@ NB. =========================================================
 Lab Section Raw images
 While integer arrays are convenient for most image processing, raw, binary, character arrays of bytes suffice for mechanical manipulations and save memory. Notice that "write_image" can also use binary arrays for its data.
 )
-$B=:raw_read_image im_path,'atkiln.png'
+$B=:read_image_raw im_path,'atkiln.png'
 1 4{.B   NB. B contains raw, undisplayable, data
 (|.B) write_image im_path,'flip.png'
 view_image im_path,'flip.png'

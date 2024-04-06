@@ -77,7 +77,7 @@ NB. see "and_archive" below
 rot_cw_90=: 3 : 0"1
 if. 1 2 e.~ ext_type y do. jpeg_rot_90 ;~y
   else.
-  z=.raw_read_image y
+  z=.read_image_raw y
   z=.(1 0&((0 1)})@i.@$@$ |: ]) |. z
   z write_image y
 end.
@@ -86,7 +86,7 @@ end.
 rot_cw_180=: 3 : 0"1
 if. 1 2 e.~ ext_type y do. jpeg_rot_180 ;~y
   else.
-  z=.raw_read_image y
+  z=.read_image_raw y
   z=.|."_1|.z
   z write_image y
 end.
@@ -95,7 +95,7 @@ end.
 rot_cw_270=: 3 : 0"1
 if. 1 2 e.~ ext_type y do. jpeg_rot_270 ;~y
   else.
-  z=.raw_read_image y
+  z=.read_image_raw y
   z=.|.(1 0&((0 1)})@i.@$@$ |: ])z
   z write_image y
 end.
@@ -104,7 +104,7 @@ end.
 flip_v=: 3 : 0"1
 if. 1 2 e.~ ext_type y do. jpeg_flip_v ;~y
   else.
-  z=.raw_read_image y
+  z=.read_image_raw y
   z=.|.z
   z write_image y
 end.
@@ -113,7 +113,7 @@ end.
 flip_h=: 3 : 0"1
 if. 1 2 e.~ ext_type y do. jpeg_flip_h ;~y
   else.
-  z=.raw_read_image y
+  z=.read_image_raw y
   z=.|."_1 z
   z write_image y
 end.
@@ -122,7 +122,7 @@ end.
 transpose=: 3 : 0"1
 if. 1 2 e.~ ext_type y do. jpeg_transpose ;~y
   else.
-  z=.raw_read_image y
+  z=.read_image_raw y
   z=.(1 0{i.#$z)|:z
   z write_image y
 end.
