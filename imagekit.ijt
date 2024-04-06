@@ -104,6 +104,7 @@ NB. =========================================================
 Lab Section Palettes
 A common 8-bit image format consists of a palette and an array of indices into the palette representing the pixels. Such a format is useful for abstract images with few colors but may also be used to approximate a full color image. In that case, quality is lost in exchange for smaller size. The function quantize_image allows us to create a palette of the specified size and the array suitable for saving.
 )
+B=:read_image im1
 B write_image im_path,'temp.bmp'
 (C256=:256 quantize_image B) write_image im_path,'atk256.bmp'
 (C16=:16 quantize_image B) write_image im_path,'atk016.png'
